@@ -24,6 +24,28 @@ $oneletter: 142px + $spacebetweenletters;
 /**
 Custom resets
 */
+
+@media screen and (max-width: 480px) {
+	body {
+		overflow: hidden;
+		&:after {
+			z-index: 99;
+			content: "This is a desktop only experience ~ mxbry.com";
+			background-color: $black;
+			position: absolute;
+			top: 0;
+			right: 0;
+			left: 0;
+			bottom: 0;
+			color: white;
+			padding: 32px;
+		}
+		aside, nav, #wrap {
+			display: none;
+		}
+	}
+}
+
 html {
     box-sizing: border-box;
 }
@@ -41,6 +63,14 @@ html, body {
 html, body, button {
 	color: $black;
 	font-family: "League Spartan", sans-serif;
+}
+
+body {
+	overflow-y: hidden;
+}
+
+a, a:visited {
+	color: $secondary;
 }
 
 #wrap {
@@ -67,8 +97,8 @@ nav {
 }
 
 .callout {
-	height: 48px;
-	width: 48px;
+	min-height: 48px;
+	min-width: 48px;
 	position: relative;
 	border: 1px solid $black;
 	color: $black;
@@ -86,9 +116,28 @@ nav {
 	}
 }
 
-.callout-active .callout {
+aside {
 	background-color: $black;
 	color: white;
+	font-size: 16px;
+	position: absolute;
+	bottom: 0;
+	padding: 32px;
+	overflow: hidden;
+	width: 100%;
+	transition: transform 0.5s $ease-out-quint;
+	will-change: transform;
+	@include transform(translateY(100%));
+}
+
+.callout-active  {
+	.callout {
+		background-color: $black;
+		color: white;
+	}
+	aside {
+		@include transform(none);
+	}
 }
 
 button {
