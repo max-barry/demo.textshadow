@@ -2,7 +2,7 @@
   "name": "experiments-text-shadow",
   "title": "experiments-text-shadow",
   "description": "",
-  "version": "0.0.1gi",
+  "version": "0.0.2",
   "keywords": [],
   "devDependencies": {
     "autoprefixer-core": "^5.2.1",
