@@ -24,8 +24,9 @@ $(function() {
 		if (state === "tilt") {
 			_body.on("mousemove", window.relativeShadow);
 		} else {
+			console.log("Removing styles");
 			_body.off("mousemove", window.relativeShadow);
-			$("h1").attr("style", "");
+			$("h1").removeAttr("style");
 		}
 
 	};
