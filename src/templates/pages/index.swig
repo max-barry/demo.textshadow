@@ -16,7 +16,7 @@ layout: base
 <aside>
 	<p>Messing around with different text-shadow animations on a hypothetical mxbry.com logo (n.b. Chrome, Firefox only)</p>
 	<br>
-	<p>>> For more information on me visit <a href="https://mxbry.com">mxbry.com</a></p>
+	<p>>> For more information on me visit <a href="https://mxbry.com/?utm_source=demo&utm_medium=website&utm_campaign=text%20shadow">mxbry.com</a></p>
 	<br>
 	<p>>> For more information on this you can <a href="https://github.com/max-barry/demo.textshadow">find the code on GitHub</a></p>
 </aside>
