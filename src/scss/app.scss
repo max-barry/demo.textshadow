@@ -1,0 +1,221 @@
+/**
+Vendor
+*/
+@import "reset";
+
+@import "scut";
+@import "bourbon";
+
+/**
+Functions
+*/
+@import "math";
+
+/**
+Vars
+*/
+$primary: #f50057;
+$secondary: #3DE0BB;
+$black: #333;
+$spacebetweenletters: 16px;
+$oneletter: 142px + $spacebetweenletters;
+
+
+/**
+Custom resets
+*/
+html {
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
+html, body {
+	min-width: 100%;
+	min-height: 100%;
+	height: 100%;
+}
+
+html, body, button {
+	color: $black;
+	font-family: "League Spartan", sans-serif;
+}
+
+#wrap {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	@include transform(translate(-50%, -50%));
+}
+
+h1 {
+	/**
+	Basic styling
+	*/
+	font-size: 156px;
+	will-change: text-shadow, transform;
+}
+
+nav {
+	padding: 64px;
+	display: flex;
+    justify-content: center;
+	align-items: center;
+	@include clearfix;
+}
+
+.callout {
+	height: 48px;
+	width: 48px;
+	position: relative;
+	border: 1px solid $black;
+	color: $black;
+	border-radius: 50%;
+	cursor: pointer;
+	@include transition(border 80ms, background-color 150ms, color 150ms);
+	&:after {
+		content: "?";
+		display: block;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		padding-top: 3px;
+		@include transform(translate(-50%, -50%))
+	}
+}
+
+.callout-active .callout {
+	background-color: $black;
+	color: white;
+}
+
+button {
+	padding: 16px 32px;
+	border: 1px solid $black;
+	background: transparent;
+	outline: none;
+    height: 48px;
+    min-width: 144px;
+    cursor: pointer;
+    @include transition(border-color 150ms, background-color 150ms);
+    &:not(:last-child) {
+    	margin-right: 16px;
+    }
+    &.active {
+		background-color: $primary;
+		color: white;
+    }
+    &:hover, &:active {
+    	border-color: $primary;
+    }
+}
+
+/**
+Shared shadow animation mixin
+*/
+@mixin shadowAnim($name, $phase1, $holdPhaseA, $holdPhaseB) {
+	@include keyframes($name) {
+		0% {
+			text-shadow: none;
+		}
+		@for $i from 1 through $phase1 {
+			#{$i}% {
+				$multip: if($i % 2 == 0, 1, -1);
+				$ldr: #{($i * $multip)}px;
+				$rdr: #{($i * $multip * -1)}px;
+				text-shadow: #{$ldr} 0px 0px $primary, #{$rdr} 0px 0px $secondary;
+			}
+		}
+		#{$holdPhaseA}%, #{$holdPhaseB}% {
+			text-shadow: $oneletter 0px 0px $primary, -#{$oneletter} 0px 0px $secondary;
+		}
+		100% {
+			text-shadow: 0px 0px 0px $primary, 0px 0px 0px $secondary;
+		}
+	};
+}
+
+/**
+Shadow seperation (basic)
+*/
+.state-basic h1 {
+	/**
+	Basic state
+	*/
+	@include animation-name(shadow);
+	@include animation-duration(3s);
+	@include animation-timing-function($ease-out-quint);
+	@include animation-iteration-count(infinite);
+}
+
+@include shadowAnim(shadow, 30, 50, 70);
+
+
+/**
+M -> MMM -> WWW
+*/
+.state-www h1 {
+	/**
+	Basic state
+	*/
+	@include animation(WWWshadow, mmmToWww);
+	@include animation-duration(3s);
+	@include animation-timing-function($ease-in-out-quint);
+	@include animation-iteration-count(infinite);
+	@include transform-origin(center 55px);
+}
+
+@include keyframes(mmmToWww) {
+	30% {
+		@include transform(none);
+	}
+	50%, 100% {
+		@include transform(rotate(180deg));
+	}
+}
+
+@include shadowAnim(WWWshadow, 10, 30, 80);
+
+/**
+M swing
+*/
+
+.state-swing h1 {
+	@include perspective(200px);
+	&:before {
+		content: "M";
+		color: $primary;
+		position: absolute;
+		z-index: -1;
+		@include animation-name(swing);
+		@include animation-duration(3s);
+		@include animation-timing-function($ease-out-quart);
+		@include animation-iteration-count(infinite);
+		@include transform-origin(right 118px);
+	}
+}
+
+@include keyframes(swing) {
+	20%, 30% {
+		color: $primary;
+		@include transform(rotateX(180deg) rotateZ(0deg));
+	}
+	40%, 60% {
+		color: $secondary;
+		@include transform(rotateX(180deg) rotateZ(180deg));
+	}
+	80%, 100% {
+		color: $black;
+		@include transform(rotateX(180deg) rotateZ(180deg) translateX(100%));
+	}
+}
+
+/**
+Mouseover perspective shift
+*/
+
+.state-tilt {
+	@include perspective(1400px);
+}

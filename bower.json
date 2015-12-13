@@ -1,0 +1,12 @@
+{
+  "name": "experiments-text-shadow",
+  "version": "0.0.1",
+  "private": "true",
+  "dependencies": {
+    "jquery": "^2.1.1",
+    "modernizr": "^2.8.3",
+    "reset-scss": "*",
+    "Scut": "scut#^1.2.1",
+    "bourbon": "~4.2.6"
+  }
+}
