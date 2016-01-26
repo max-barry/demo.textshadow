@@ -202,7 +202,7 @@ module.exports = function(grunt) {
                 ]
             },
             dist: {
-                src: "<%= pkg.build.css %>**/*.css"
+                src: ["<%= pkg.build.css %>**/*.css", "!<%= pkg.build.css %>font.css"]
             }
         },
         cmq: {
